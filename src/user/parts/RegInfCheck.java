@@ -1,0 +1,125 @@
+package user.parts;
+
+public class RegInfCheck {
+	
+	final static String CHECK_TYPE_FIX = "1";
+	final static String CHECK_TYPE_WITHIN = "0";
+	
+	public RegInfCheck() {
+	}
+	
+	public String checkId(String id, String msg) {
+		
+		StringBuffer errMsg = new StringBuffer(msg);
+		
+		// 数値チェック
+		if (!numberCheck(id)) {
+			errMsg.append("IDは数値で入力してください。<br />");
+		}
+
+		// 桁数チェック(固定)
+		if (!lengthCheck(id, CHECK_TYPE_FIX, 3)) {
+			errMsg.append("IDは3桁(固定)で入力してください。<br />");
+		}
+
+		// 範囲チェック(001-999)
+		if (!limitCheck(id, 1, 999)) {
+			errMsg.append("IDは(001-999)の範囲で入力してください。<br />");
+		}
+		
+		return errMsg.toString();
+
+	}
+
+	public String checkName(String name, String msg) {
+
+		StringBuffer errMsg = new StringBuffer(msg);
+
+		// 桁数チェック(以内)
+		if (!lengthCheck(name, CHECK_TYPE_WITHIN, 10)) {
+			errMsg.append("名前は10桁以内で入力してください。<br />");
+		}
+
+		return errMsg.toString();
+	}
+	
+	public String checkAge(String age, String msg) {
+
+		StringBuffer errMsg = new StringBuffer(msg);
+		
+		// 数値チェック
+		if (!numberCheck(age)) {
+			errMsg.append("年齢は数値(半角)で入力してください。<br />");
+		}
+		
+		// 桁数チェック(以内)
+		if (!lengthCheck(age, CHECK_TYPE_WITHIN, 3)) {
+			errMsg.append("年齢は3桁以内で入力してください。<br />");
+		}
+		
+		// 範囲チェック(16-60)
+		if (!limitCheck(age, 16, 60)) {
+			errMsg.append("年齢は(16-60)の範囲で入力してください。<br />");
+		}
+		
+		return errMsg.toString();
+	}
+
+	private boolean numberCheck(final String str) {
+
+		int intChk = 0; 
+		for (int i = 0; i < str.length(); i++) { 
+		
+			char c = str.charAt(i);
+			char c1 = '0'; 
+			char c2 = '9'; 
+			if (c < c1 || c > c2) {
+				intChk = intChk + 1;
+			} 
+		}
+
+		if (intChk == 0) {
+			return true;
+		} else {
+			return false;
+		} 
+	}
+
+	private boolean lengthCheck(final String str, final String type, final int dig) {
+		
+		if (str == null || str.length()==0) {
+			return false;
+		}
+		
+		if (CHECK_TYPE_FIX.equals(type)) {
+			
+			if (str.length() == dig ) {
+				return true;
+			} else { 
+				return false;
+			}
+		} else {
+			
+			if (str.length() <= dig) {
+				return true;
+			} else { 
+				return false;
+			}
+		}
+	}
+	
+	private boolean limitCheck(final String val, final int min, final int max) {
+		
+		try {
+			int num = Integer.parseInt(val);
+		
+			if ((min <= num) && (num <= max)) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+	}
+}
