@@ -1,6 +1,5 @@
 package user.control;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -34,13 +33,9 @@ public class RegIdGet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		try {
-
-			File file = new File("c:\\temp/userInfo.txt");
-	
+		try {	
 			// åªç›ìoò^Ç≥ÇÍÇƒÇ¢ÇÈìoò^é“ÇéÊìæ
-			ReadRegistInfo ru = new ReadRegistInfo();
-			RegistrantInfo[] result = ru.getReglist(file);
+			RegistrantInfo[] result = ReadRegistInfo.getReglist();
 
 			String tempString = JSON.encode(result);
 			String resInfo = "{\"regInfo\" : " + tempString+ "}";

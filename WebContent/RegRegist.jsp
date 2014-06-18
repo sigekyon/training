@@ -7,14 +7,14 @@
 <html>
 <head>
 <link rel="stylesheet" href="Task.css" type="text/css" />
-<title>登録者登録</title>
+<title>雇用者登録</title>
 </head>
 <body>
 
 	<%@ include file="Header.jsp" %>
 
 	<div id="main">
-		登録者登録
+		雇用者登録
 		<hr color=white width=30%>
 		<% String errMsg = (String)request.getAttribute("errMsg");
 		if (errMsg!=null) { %>
@@ -24,10 +24,6 @@
 		<form action='ProcReg' method=POST>
 
 		<table border="0" align="center">
-			<tr>
-			<th>ID</th>
-			<td><input type='text' name='regId'></td>
-			</tr>
 			<tr>
 			<th>名前</th>
 			<td><input type='text' name='regName'></td>

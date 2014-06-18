@@ -9,30 +9,24 @@ import java.io.LineNumberReader;
 import user.bean.RegistrantInfo;
 
 public class ReadRegistInfo {
+	final static private File file = new File("c:\\temp/userInfo.txt");
 
-	public int lineCount(File f) throws IOException {
-		
-
-		LineNumberReader lr = new LineNumberReader(new FileReader(f));
-
+	public static int lineCount() throws IOException {
+		LineNumberReader lr = new LineNumberReader(new FileReader(file));
 		String tmpLine;
-
 		while (null != (tmpLine = lr.readLine())) {
-			;
 		}
-
 		int lineNum = lr.getLineNumber();
-
 		lr.close();
 		
 		return lineNum;
 	}
 
-	public RegistrantInfo[] getReglist(File file) throws IOException {
+	public static RegistrantInfo[] getReglist() throws IOException {
 
 		BufferedReader br = new BufferedReader(new FileReader(file));
 
-		int lineNum = lineCount(file);
+		int lineNum = lineCount();
 		RegistrantInfo[] regInfo = new RegistrantInfo[lineNum];
 
 		String rLine = null;
@@ -51,24 +45,28 @@ public class ReadRegistInfo {
 		return regInfo;
 	}
 
-	public String[] getRegId(File file) throws IOException {
+	public static String getNewId() throws IOException {
 
 		BufferedReader br = new BufferedReader(new FileReader(file));
 
-		int lineNum = lineCount(file);
-		String[] idList = new String[lineNum];
+		int lineNum = lineCount();
+		int intNewId = 0;
+		int bufId;
+		String strNewId = null;
 		String rLine = null;
 
 		for (int i=0; i<lineNum; i++) {
-			idList[i] = new String();
 			rLine = br.readLine();
 			String[] rInfo = rLine.split(",");
-
-			idList[i] = rInfo[0];
+			bufId = Integer.parseInt(rInfo[0]);
+			if(intNewId < bufId){
+				intNewId = bufId;
+			}
 		}
-
+		strNewId = String.format("%1$03d", intNewId + 1);
 		br.close();
-		return idList;
+		
+		return strNewId;
 	}
 	
 }

@@ -32,11 +32,9 @@ public class RegistList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			File file = new File("c:\\temp/userInfo.txt");
 			
 			// Œ»İ“o˜^‚³‚ê‚Ä‚¢‚é“o˜^Ò‚ğæ“¾
-			ReadRegistInfo ru = new ReadRegistInfo();
-			RegistrantInfo[] regInfo = ru.getReglist(file);
+			RegistrantInfo[] regInfo = ReadRegistInfo.getReglist();
 
 			HttpSession session = request.getSession(false);
 			session.setAttribute("regList", regInfo);

@@ -1,8 +1,6 @@
 package user.control;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 import user.bean.RegistrantInfo;
 import user.parts.ReadRegistInfo;
@@ -52,43 +50,33 @@ public class ProcReg extends HttpServlet {
 			errMsg = "";
 
 			// 登録されたパラメータを取得
-			String regId = request.getParameter("regId");
 			String regName = request.getParameter("regName");
 			String regAge = request.getParameter("regAge");
-			
-			if (!inputCheck(regId, regName, regAge)) {
-				// 入力データに誤りがあった場合はその旨を表示させる
+			// 新規IDを設定
+			String regId = ReadRegistInfo.getNewId();
+			if(regId.equals("1000")){
+				errMsg += "登録可能なID（999）を超えています。管理者に問い合わせてください。<br />";
+			}			
+			else if(inputCheck(regName, regAge)){// 入力データに誤りがあった場合はその旨を表示させる
+			}
+			if(!errMsg.equals("")){
 				request.setAttribute("errMsg", errMsg);
 				rd = request.getRequestDispatcher("/RegRegist.jsp");
 				rd.forward(request, response);
 				return ;
 			}
-		
-			File file = new File("c:\\temp/userInfo.txt");
+			// 入力情報を設定
+			RegistrantInfo regInfo = new RegistrantInfo();
+			regInfo.setrId(regId);
+			regInfo.setrName(regName);
+			regInfo.setrAge(regAge);
 
-			// 登録されているIDを取得
-			ReadRegistInfo ru = new ReadRegistInfo();
-			String[] idList = ru.getRegId(file);
+			// データを書き込む
+			WriteRegistInfo.regRegInfo(regInfo);
 
-			if (Arrays.asList(idList).contains(regId)) {
-				errMsg = "入力されたIDは既に登録されています。<br />";
-				request.setAttribute("errMsg", errMsg);
-				rd = request.getRequestDispatcher("/RegRegist.jsp");
-			} else {
-				// 入力情報を設定
-				RegistrantInfo regInfo = new RegistrantInfo();
-				regInfo.setrId(regId);
-				regInfo.setrName(regName);
-				regInfo.setrAge(regAge);
-
-				// データを書き込む
-				WriteRegistInfo wu = new WriteRegistInfo();
-				wu.regRegInfo(file, regInfo);
-
-				// 結果画面へ遷移するための情報を設定
-				request.setAttribute("regInfo", regInfo);
-				rd = request.getRequestDispatcher("/RegistResult.jsp");
-			}
+			// 結果画面へ遷移するための情報を設定
+			request.setAttribute("regInfo", regInfo);
+			rd = request.getRequestDispatcher("/RegistResult.jsp");
 
 			rd.forward(request, response);
 		
@@ -103,13 +91,10 @@ public class ProcReg extends HttpServlet {
 		}
 	}
 
-	private boolean inputCheck(String regId, String regName, String regAge) {
+	private boolean inputCheck(String regName, String regAge) {
 
-		RegInfCheck regChk = new RegInfCheck();
-
-		errMsg = regChk.checkId(regId, errMsg);
-		errMsg = regChk.checkName(regName, errMsg);
-		errMsg = regChk.checkAge(regAge, errMsg);
+		errMsg = RegInfCheck.checkName(regName, errMsg);
+		errMsg = RegInfCheck.checkAge(regAge, errMsg);
 	
 		if ("".equals(errMsg)) {
 			return true;

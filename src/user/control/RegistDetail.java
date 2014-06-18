@@ -1,6 +1,5 @@
 package user.control;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -38,11 +37,9 @@ public class RegistDetail extends HttpServlet {
 		
 		try {
 			String parameter = request.getParameter(REQUEST_STRING);
-			File file = new File("c:\\temp/userInfo.txt");
 	
 			// Œ»İ“o˜^‚³‚ê‚Ä‚¢‚é“o˜^Ò‚ğæ“¾
-			ReadRegistInfo ru = new ReadRegistInfo();
-			RegistrantInfo[] regInfo = ru.getReglist(file);
+			RegistrantInfo[] regInfo = ReadRegistInfo.getReglist();
 			RegistrantInfo result = new RegistrantInfo(); 
 
 			for (int i=0; i <regInfo.length; i++) {

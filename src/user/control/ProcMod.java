@@ -1,6 +1,5 @@
 	package user.control;
 
-import java.io.File;
 import java.io.IOException;
 
 import user.bean.RegistrantInfo;
@@ -62,11 +61,8 @@ public class ProcMod extends HttpServlet {
 			String regName = request.getParameter("regName");
 			String regAge = request.getParameter("regAge");
 
-			File file = new File("c:\\temp/userInfo.txt");
-
 			// Œ»İ“o˜^‚³‚ê‚Ä‚¢‚é“o˜^Ò‚ğæ“¾
-			ReadRegistInfo ru = new ReadRegistInfo();
-			RegistrantInfo[] regInfo = ru.getReglist(file);
+			RegistrantInfo[] regInfo = ReadRegistInfo.getReglist();
 
 			if (!inputCheck(regName, regAge)) {
 				// “ü—Íƒf[ƒ^‚ÉŒë‚è‚ª‚ ‚Á‚½ê‡‚Í‚»‚Ì|‚ğ•\¦‚³‚¹‚é
@@ -78,8 +74,7 @@ public class ProcMod extends HttpServlet {
 				inputInfo.setrAge(regAge);
 				
 				// ƒf[ƒ^‚ğ‘‚«‚Ş
-				WriteRegistInfo wu = new WriteRegistInfo();
-				wu.modRegInfo(file, inputInfo, regInfo);
+				WriteRegistInfo.modRegInfo(inputInfo, regInfo);
 				
 				// Œ‹‰Ê‰æ–Ê‚Ö‘JˆÚ‚·‚é‚½‚ß‚Ìî•ñ‚ğİ’è
 				request.setAttribute("modInfo", inputInfo);
@@ -99,10 +94,8 @@ public class ProcMod extends HttpServlet {
 
 	private boolean inputCheck(String regName, String regAge) {
 
-		RegInfCheck regChk = new RegInfCheck();
-
-		errMsg = regChk.checkName(regName, errMsg);
-		errMsg = regChk.checkAge(regAge, errMsg);
+		errMsg = RegInfCheck.checkName(regName, errMsg);
+		errMsg = RegInfCheck.checkAge(regAge, errMsg);
 
 		if ("".equals(errMsg)) {
 			return true;
