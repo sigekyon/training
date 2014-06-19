@@ -1,5 +1,11 @@
 package user.parts;
 
+/**
+ * このクラスは、入力値をチェックする機能を提供します。
+ * 
+ * <br>最終更新日：2014/6/19
+ * @version 1.0
+ */
 public class RegInfCheck {
 	
 	final static String CHECK_TYPE_FIX = "1";

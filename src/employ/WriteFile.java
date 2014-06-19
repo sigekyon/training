@@ -2,6 +2,12 @@ package employ;
 
 import java.io.*;
 
+/**
+ * このクラスは、ファイル書き込みのための基本的な操作を提供します。
+ * 
+ * <br>最終更新日：2014/6/19
+ * @version 1.0
+ */
 public class WriteFile {
 	private File  file ;
 	private PrintWriter pw;

@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Login
+ * 現在ログインしているユーザのセッションを破棄します。
+ * 
+ * <br>最終更新日：2014/6/19
+ * @version 1.0
  */
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;

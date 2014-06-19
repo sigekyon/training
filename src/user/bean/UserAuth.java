@@ -4,6 +4,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * このクラスは、ログインユーザの認証を行います。
+ * 
+ * <br>最終更新日：2014/6/19
+ * @version 1.0
+ */
 public class UserAuth {
 
 	public UserAuth() {
@@ -12,8 +18,18 @@ public class UserAuth {
 	public boolean execute(UserInfo uInfo) throws IOException {
 
 		Properties prop = new Properties();
-		prop.load(new FileInputStream("c:\\temp/user.properties"));
-
+		FileInputStream fis = null;
+		
+		try{
+			fis = new FileInputStream("c:\\temp/user.properties");
+			prop.load(fis);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			fis.close();
+		}
 		String tmpId = prop.getProperty("user.id");
 		String[] id = tmpId.split(",");
 		String tmpPass = prop.getProperty("user.pass");

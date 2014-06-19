@@ -15,7 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class RegistList
+ * クライアント引数の入力チェックを行います。また、userInfo.txtを読み込み、<br>
+ * IDを現在の最大値+1で取得し、クライアント引数とあわせて雇用者情報を<br>
+ * userInfo.txtに書き込みます。
+ * <br>最終更新日：2014/6/19
+ * @version 1.0
  */
 public class ProcReg extends HttpServlet {
 	private static final long serialVersionUID = 1L;

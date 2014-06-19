@@ -8,6 +8,12 @@ import java.io.PrintWriter;
 
 import user.bean.RegistrantInfo;
 
+/**
+ * このクラスは、雇用者情報の書き込みに関する機能を提供します。
+ * 
+ * <br>最終更新日：2014/6/19
+ * @version 1.0
+ */
 public class WriteRegistInfo {
 	final static File file = new File("c:\\temp/userInfo.txt");
 	final static String infSprit = ",";

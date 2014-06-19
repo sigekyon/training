@@ -2,6 +2,12 @@ package user.bean;
 
 import java.io.Serializable;
 
+/**
+ * このクラスは、雇用者情報のエンティティクラスです。
+ * 
+ * <br>最終更新日：2014/6/19
+ * @version 1.0
+ */
 public class RegistrantInfo implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

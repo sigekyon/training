@@ -8,6 +8,12 @@ import java.io.LineNumberReader;
 
 import user.bean.RegistrantInfo;
 
+/**
+ * このクラスは、雇用者情報の読み出しに関する機能を提供します。
+ * 
+ * <br>最終更新日：2014/6/19
+ * @version 1.0
+ */
 public class ReadRegistInfo {
 	final static private File file = new File("c:\\temp/userInfo.txt");
 

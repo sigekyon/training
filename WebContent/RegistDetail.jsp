@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="user.bean.RegistrantInfo"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <jsp:useBean id="userInfo" scope="session" class="user.bean.UserInfo" />
 <html>
