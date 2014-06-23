@@ -93,10 +93,10 @@ public class ProcMod extends HttpServlet {
 	}
 
 	private boolean inputCheck(String regName, String regAge) {
-
-		errMsg = RegInfCheck.checkName(regName, errMsg);
-		errMsg = RegInfCheck.checkAge(regAge, errMsg);
-
+		RegInfCheck richk = new RegInfCheck();
+		richk.checkName(regName);
+		richk.checkAge(regAge);
+		errMsg = richk.getErrMsg();
 		if ("".equals(errMsg)) {
 			return true;
 		} else {

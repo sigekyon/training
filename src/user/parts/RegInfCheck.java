@@ -1,49 +1,49 @@
 package user.parts;
 
 /**
- * このクラスは、入力値をチェックする機能を提供します。
+ * このクラスは、雇用者情報の入力値をチェックする機能を提供します。
  * 
  * <br>最終更新日：2014/6/19
  * @version 1.0
  */
 public class RegInfCheck {
-	
+	private StringBuilder errMsg = new StringBuilder();
 	final static String CHECK_TYPE_FIX = "1";
 	final static String CHECK_TYPE_WITHIN = "0";
 	
-	public RegInfCheck() {
-	}
-	
-	public static String checkName(String name, String msg) {
-
-		StringBuffer errMsg = new StringBuffer(msg);
-
-		// 桁数チェック(以内)
-		if (!lengthCheck(name, CHECK_TYPE_WITHIN, 10)) {
-			errMsg.append("名前は10桁以内で入力してください。<br />");
-		}
-
+	public String getErrMsg() {
 		return errMsg.toString();
 	}
 	
-	public static String checkAge(String age, String msg) {
+	public void checkName(String regName) {
 
-		StringBuffer errMsg = new StringBuffer(msg);
+		// 桁数チェック(以内)
+		if (!lengthCheck(regName, CHECK_TYPE_WITHIN, 10)) {
+			errMsg.append("名前は10桁以内で入力してください。<br />");
+		}
+	}
+	
+	public void checkAge(String regAge) {
 		
 		// 数値チェック
-		if (!numberCheck(age)) {
+		if (!numberCheck(regAge)) {
 			errMsg.append("年齢は数値(半角)で入力してください。<br />");
 		}
 		
 		// 範囲チェック(16-60)
-		if (!limitCheck(age, 16, 60)) {
+		if (!limitCheck(regAge, 16, 60)) {
 			errMsg.append("年齢は(16-60)の範囲で入力してください。<br />");
 		}
-		
-		return errMsg.toString();
+	}
+	
+	public void checkId(String regId){
+		if(!maxCheck(regId,1000)){
+			errMsg.append("登録可能なID（999）を超えています。管理者に問い合わせてください。<br />");
+		}	
 	}
 
-	private static boolean numberCheck(final String str) {
+
+	private boolean numberCheck(final String str) {
 
 		int intChk = 0; 
 		for (int i = 0; i < str.length(); i++) { 
@@ -63,7 +63,7 @@ public class RegInfCheck {
 		} 
 	}
 
-	private static boolean lengthCheck(final String str, final String type, final int dig) {
+	private boolean lengthCheck(final String str, final String type, final int dig) {
 		
 		if (str == null || str.length()==0) {
 			return false;
@@ -86,7 +86,33 @@ public class RegInfCheck {
 		}
 	}
 	
-	private static boolean limitCheck(final String val, final int min, final int max) {
+	private boolean minCheck(final String val, final int min){
+		try {
+			int num = Integer.parseInt(val);
+		
+			if (min < num) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	private boolean maxCheck(final String val, final int max){
+		try {
+			int num = Integer.parseInt(val);
+		
+			if (num < max) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	private boolean limitCheck(final String val, final int min, final int max) {
 		
 		try {
 			int num = Integer.parseInt(val);

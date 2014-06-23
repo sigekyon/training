@@ -15,9 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * クライアント引数の入力チェックを行います。また、userInfo.txtを読み込み、<br>
- * IDを現在の最大値+1で取得し、クライアント引数とあわせて雇用者情報を<br>
- * userInfo.txtに書き込みます。
+ * 雇用者登録を行います。
+ * 
  * <br>最終更新日：2014/6/19
  * @version 1.0
  */
@@ -58,11 +57,9 @@ public class ProcReg extends HttpServlet {
 			String regAge = request.getParameter("regAge");
 			// 新規IDを設定
 			String regId = ReadRegistInfo.getNewId();
-			if(regId.equals("1000")){
-				errMsg += "登録可能なID（999）を超えています。管理者に問い合わせてください。<br />";
-			}			
-			else if(inputCheck(regName, regAge)){// 入力データに誤りがあった場合はその旨を表示させる
-			}
+		
+			inputCheck(regId,regName, regAge);// 入力データに誤りがあった場合はその旨を表示させる
+
 			if(!errMsg.equals("")){
 				request.setAttribute("errMsg", errMsg);
 				rd = request.getRequestDispatcher("/RegRegist.jsp");
@@ -95,15 +92,11 @@ public class ProcReg extends HttpServlet {
 		}
 	}
 
-	private boolean inputCheck(String regName, String regAge) {
-
-		errMsg = RegInfCheck.checkName(regName, errMsg);
-		errMsg = RegInfCheck.checkAge(regAge, errMsg);
-	
-		if ("".equals(errMsg)) {
-			return true;
-		} else {
-			return false;
-		}
+	private void inputCheck(String regId, String regName, String regAge) {
+		RegInfCheck richk = new RegInfCheck();
+		richk.checkId(regId);
+		richk.checkName(regName);
+		richk.checkAge(regAge);
+		errMsg = richk.getErrMsg();
 	}
 }
