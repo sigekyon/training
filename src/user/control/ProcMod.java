@@ -61,9 +61,6 @@ public class ProcMod extends HttpServlet {
 			String regName = request.getParameter("regName");
 			String regAge = request.getParameter("regAge");
 
-			// Œ»İ“o˜^‚³‚ê‚Ä‚¢‚é“o˜^Ò‚ğæ“¾
-			RegistrantInfo[] regInfo = ReadRegistInfo.getReglist();
-
 			if (!inputCheck(regName, regAge)) {
 				// “ü—Íƒf[ƒ^‚ÉŒë‚è‚ª‚ ‚Á‚½ê‡‚Í‚»‚Ì|‚ğ•\¦‚³‚¹‚é
 				request.setAttribute("errMsg", errMsg);
@@ -74,7 +71,7 @@ public class ProcMod extends HttpServlet {
 				inputInfo.setrAge(regAge);
 				
 				// ƒf[ƒ^‚ğ‘‚«‚Ş
-				WriteRegistInfo.modRegInfo(inputInfo, regInfo);
+				WriteRegistInfo.modRegInfo(inputInfo);
 				
 				// Œ‹‰Ê‰æ–Ê‚Ö‘JˆÚ‚·‚é‚½‚ß‚Ìî•ñ‚ğİ’è
 				request.setAttribute("modInfo", inputInfo);

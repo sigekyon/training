@@ -17,14 +17,13 @@ import user.bean.RegistrantInfo;
 public class ReadRegistInfo {
 	final static private File file = new File("c:\\temp/userInfo.txt");
 
-	private static int lineCount() throws IOException {
+	private static int lineCount() throws IOException{
 		LineNumberReader lr = new LineNumberReader(new FileReader(file));
 		String tmpLine;
 		while (null != (tmpLine = lr.readLine())) {
 		}
 		int lineNum = lr.getLineNumber();
 		lr.close();
-		
 		return lineNum;
 	}
 

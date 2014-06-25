@@ -30,9 +30,8 @@ public class WriteRegistInfo {
 		
 	}
 	
-	public static void modRegInfo(RegistrantInfo inputInfo,
-			RegistrantInfo[] regInfo) throws IOException{
-
+	public static void modRegInfo(RegistrantInfo inputInfo) throws IOException{
+		RegistrantInfo[] regInfo = getRegInfo();
 		int t = searchId(inputInfo.getrId(), regInfo);
 
 		FileWriter fWriter = new FileWriter(file);
@@ -52,9 +51,8 @@ public class WriteRegistInfo {
 		pw.close();		
 	}
 	
-	public static void delRegInfo(RegistrantInfo inputInfo,
-			RegistrantInfo[] regInfo) throws IOException {
-		
+	public static void delRegInfo(RegistrantInfo inputInfo) throws IOException {
+		RegistrantInfo[] regInfo = getRegInfo();
 		int t = searchId(inputInfo.getrId(), regInfo);
 	
 		FileWriter fWriter = new FileWriter(file);
@@ -89,6 +87,11 @@ public class WriteRegistInfo {
 		}
 
 		return target_number;
+	}
+	
+	private static RegistrantInfo[] getRegInfo() throws IOException{
+		RegistrantInfo[] getRegInfo = ReadRegistInfo.getReglist();
+		return getRegInfo;
 	}
 
 }

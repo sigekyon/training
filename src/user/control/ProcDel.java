@@ -43,12 +43,9 @@ public class ProcDel extends HttpServlet {
 			// ‘ÎÛ‚Ì“o˜^Ò‚ğæ“¾
 			HttpSession session = request.getSession(false);
 			RegistrantInfo inputInfo = (RegistrantInfo)session.getAttribute("targetInfo");
-
-			// Œ»İ“o˜^‚³‚ê‚Ä‚¢‚é“o˜^Ò‚ğæ“¾
-			RegistrantInfo[] regInfo = ReadRegistInfo.getReglist();
 			
 			// ƒf[ƒ^‚ğ‘‚«‚Ş
-			WriteRegistInfo.delRegInfo(inputInfo, regInfo);
+			WriteRegistInfo.delRegInfo(inputInfo);
 
 			// Œ‹‰Ê‰æ–Ê‚Ö‘JˆÚ‚·‚é‚½‚ß‚Ìî•ñ‚ğİ’è
 			request.setAttribute("delInfo", inputInfo);
