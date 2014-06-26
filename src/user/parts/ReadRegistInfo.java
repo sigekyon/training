@@ -15,7 +15,7 @@ import user.bean.RegistrantInfo;
  * @version 1.0
  */
 public class ReadRegistInfo {
-	final static private File file = new File("c:\\temp/userInfo.txt");
+	final static private File file = new File("c:/temp/userInfo.txt");
 
 	private static int lineCount() throws IOException{
 		LineNumberReader lr = new LineNumberReader(new FileReader(file));

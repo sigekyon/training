@@ -1,5 +1,12 @@
 package employ;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+
 /**
  * このクラスは、ログファイルへの書き込みを行います。
  * 
@@ -7,30 +14,30 @@ package employ;
  * @version 1.0
  */
 public class OutLog {
-	static String fileName ="log.txt";
-	static String filePath = "C:\\test\\log\\" + fileName ;
+	static File file = new File("C:/test/log/log.txt");
+	static PrintWriter pw;
 	
-	public static void outLogDmp(String s){
-		//ログファイルオープン
-		WriteFile wf = new WriteFile(filePath);
+	public static void outLogDmp(String s){	
 		try {
-			wf.openFile();
-			wf.writeFile(s);
-			wf.closeFile();
+			openFile();
+			pw.write(DateString.getDate14() + ":" + s);
+			pw.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
 	public static void outLogDmp(Integer s){
-		//ログファイルオープン
-		WriteFile wf = new WriteFile(filePath);
 		try {
-			wf.openFile();
-			wf.writeFile(s.toString());
-			wf.closeFile();
+			openFile();
+			pw.write(DateString.getDate14() + ":" + s.toString());
+			pw.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	}
+	
+	private static void openFile() throws IOException{
+		pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream (file, true)));
 	}
 }
