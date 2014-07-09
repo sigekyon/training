@@ -2,9 +2,11 @@ package user.control;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import user.bean.RegistrantInfo;
 import user.parts.ReadRegistInfo;
+import user.parts.RegInfDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,11 +32,11 @@ public class RegistList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		RegInfDAO rDAO = null;
 		try {
-			
+			rDAO = new RegInfDAO();
 			// åªç›ìoò^Ç≥ÇÍÇƒÇ¢ÇÈìoò^é“ÇéÊìæ
-			RegistrantInfo[] regInfo = ReadRegistInfo.getReglist();
+			ArrayList<RegistrantInfo> regInfo = rDAO.getReglist();
 
 			HttpSession session = request.getSession(false);
 			session.setAttribute("regList", regInfo);

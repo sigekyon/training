@@ -11,14 +11,14 @@
 <script type="text/javascript" src="js/jquery.json-2.4.js"></script>
 <script type="text/javascript" src="js/ListInit.js" charset="UTF-8"></script>
 <script type="text/javascript" src="js/ListDetail.js" charset="UTF-8"></script>
-<title>登録者一覧</title>
+<title>雇用者一覧</title>
 </head>
 <body>
 
 	<%@ include file="Header.jsp"%>
 
 	<div id="main">
-		登録者一覧
+		雇用者一覧
 		<hr color=white width=30%>
 		<div class="tabbox">
 			<p class="tabs" id="target">

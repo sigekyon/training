@@ -7,13 +7,13 @@
 <html>
 <head>
 <link rel="stylesheet" href="Task.css" type="text/css" />
-<title>登録者変更</title>	
+<title>雇用者情報変更結果</title>	
 </head>
 <body>
 	<%@ include file="Header.jsp" %>
 
 	<div id="main">
-		登録者変更<hr color=white width=30%>
+		雇用者情報変更結果<hr color=white width=30%>
 		更新しました<br />
 		<table class="regList">
 		<tr>

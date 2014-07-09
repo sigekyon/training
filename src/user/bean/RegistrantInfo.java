@@ -16,6 +16,14 @@ public class RegistrantInfo implements Serializable {
 	String rName = null;
 	String rAge = null;
 
+	public RegistrantInfo(String rId, String rName, String rAge) {
+		this.rId = rId;
+		this.rName = rName;
+		this.rAge = rAge;
+	}
+	public RegistrantInfo() {
+		
+	}
 	public String getrId() {
 		return rId;
 	}

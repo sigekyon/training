@@ -8,14 +8,14 @@
 <html>
 <head>
 <link rel="stylesheet" href="Task.css" type="text/css" />
-<title>登録者変更</title>
+<title>雇用者情報変更</title>
 </head>
 <body>
 
 	<%@ include file="Header.jsp" %>
 
 	<div id="main">
-		登録者変更
+		雇用者情報変更
 		<hr color=white width=30%>
 		<% String errMsg = (String)request.getAttribute("errMsg");
 		if (errMsg!=null) { %>

@@ -11,14 +11,14 @@
 </script>
 <script type="text/javascript" src="js/RegFilter2.js">
 </script>
-<title>登録者一覧</title>
+<title>雇用者一覧</title>
 </head>
 <body>
 
 	<%@ include file="Header.jsp"%>
 
 	<div id="main">
-		登録者一覧
+		雇用者一覧
 		<hr color=white width=30%>
 		<table class="regList" id="regList">
 		<tbody>
@@ -32,19 +32,17 @@
 					style="text-decoration: none">名前</th>
 			</tr>
 			<%
-				RegistrantInfo[] rInfo = (RegistrantInfo[]) session
-						.getAttribute("regList");
-
-				for (int i = 0; i < rInfo.length; i++) {
+				ArrayList<RegistrantInfo> rInfo = (ArrayList<RegistrantInfo>) session.getAttribute("regList");
+				for (int i = 0; i < rInfo.size(); i++) {
 			%>
 			<tr>
 				<td><a href="RegistDetail.jsp?onNum=<%=i%>"
-					style="text-decoration: none" id=<%="regList"+i %>><%=rInfo[i].getrId()%></a></td>
-				<td><%=rInfo[i].getrName()%></td>
+					style="text-decoration: none" id=<%="regList"+i %>><%=rInfo.get(i).getrId()%></a></td>
+				<td><%=rInfo.get(i).getrName()%></td>
 			</tr>
-				<%
-					}
-				%>
+			<%
+				}
+			%>
 		</tbody>
 		</table>
 		<br />
