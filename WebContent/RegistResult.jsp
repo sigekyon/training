@@ -7,13 +7,13 @@
 <html>
 <head>
 <link rel="stylesheet" href="Task.css" type="text/css" />
-<title>“o˜^ŽÒ“o˜^</title>	
+<title>ŒÙ—pŽÒ“o˜^</title>	
 </head>
 <body>
 	<%@ include file="Header.jsp" %>
 
 	<div id="main">
-		“o˜^ŽÒ“o˜^<hr color=white width=30%>
+		ŒÙ—pŽÒ“o˜^<hr color=white width=30%>
 		Š®—¹‚µ‚Ü‚µ‚½<br />
 		<table class="regList">
 		<tr>

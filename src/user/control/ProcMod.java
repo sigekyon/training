@@ -5,6 +5,7 @@ import java.io.IOException;
 import user.bean.RegistrantInfo;
 import user.parts.ReadRegistInfo;
 import user.parts.RegInfCheck;
+import user.parts.RegInfDAO;
 import user.parts.WriteRegistInfo;
 
 import javax.servlet.RequestDispatcher;
@@ -44,13 +45,13 @@ public class ProcMod extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
+		RegInfDAO rDAO = null;
 		try {
 
 			request.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=UTF-8");
 			RequestDispatcher rd = null;
-
+			rDAO = new RegInfDAO();
 			errMsg = "";
 
 			// ‘ÎÛ‚Ì“o˜^Ò‚ğæ“¾
@@ -71,7 +72,7 @@ public class ProcMod extends HttpServlet {
 				inputInfo.setrAge(regAge);
 				
 				// ƒf[ƒ^‚ğ‘‚«‚Ş
-				WriteRegistInfo.modRegInfo(inputInfo);
+				rDAO.update(inputInfo.getrId(), regName, regAge);
 				
 				// Œ‹‰Ê‰æ–Ê‚Ö‘JˆÚ‚·‚é‚½‚ß‚Ìî•ñ‚ğİ’è
 				request.setAttribute("modInfo", inputInfo);
@@ -86,6 +87,8 @@ public class ProcMod extends HttpServlet {
 		    session.invalidate();   
 			RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
 			rd.forward(request, response);
+		} finally {
+			rDAO.close();
 		}
 	}
 

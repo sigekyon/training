@@ -1,4 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" import="user.bean.RegistrantInfo"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="user.bean.RegistrantInfo"
+import="user.bean.RegistrantInfo"
+import="java.util.ArrayList"
+%>
 
 <!DOCTYPE html>
 
@@ -6,21 +9,21 @@
 <html>
 <head>
 <link rel="stylesheet" href="Task.css" type="text/css" />
-<title>登録者一覧</title>	
+<title>雇用者情報詳細</title>	
 </head>
 <body>
 	<%@ include file="Header.jsp" %>
 
 	<div id="main">
-		登録者一覧<hr color=white width=30%>
+	雇用者情報詳細<hr color=white width=30%>
 		<table class="regList">
 		<% 
 		   RegistrantInfo outInfo = null;
 		   String onNum = request.getParameter("onNum");
-   
+
 		   if (onNum!=null) {
-			   RegistrantInfo[] rInfo = (RegistrantInfo[]) session.getAttribute("regList");
-			   outInfo = rInfo[Integer.parseInt(onNum)];
+			   ArrayList<RegistrantInfo> rInfo = (ArrayList<RegistrantInfo>) session.getAttribute("regList");
+			   outInfo = rInfo.get(Integer.parseInt(onNum));
 			   session.setAttribute("targetInfo", outInfo);
 			} else {
 			   outInfo = (RegistrantInfo)session.getAttribute("targetInfo");	

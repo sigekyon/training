@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import user.bean.RegistrantInfo;
 import user.parts.ReadRegistInfo;
+import user.parts.RegInfDAO;
 import user.parts.WriteRegistInfo;
 
 import javax.servlet.RequestDispatcher;
@@ -33,19 +34,19 @@ public class ProcDel extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
+		RegInfDAO rDAO = null;
 		try {
 
 			request.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=UTF-8");
 			RequestDispatcher rd = null;
-
+			rDAO = new RegInfDAO();
 			// ‘ÎÛ‚Ì“o˜^Ò‚ğæ“¾
 			HttpSession session = request.getSession(false);
 			RegistrantInfo inputInfo = (RegistrantInfo)session.getAttribute("targetInfo");
 			
 			// ƒf[ƒ^‚ğ‘‚«‚Ş
-			WriteRegistInfo.delRegInfo(inputInfo);
+			rDAO.delete(inputInfo.getrId());
 
 			// Œ‹‰Ê‰æ–Ê‚Ö‘JˆÚ‚·‚é‚½‚ß‚Ìî•ñ‚ğİ’è
 			request.setAttribute("delInfo", inputInfo);
@@ -63,6 +64,8 @@ public class ProcDel extends HttpServlet {
 					"/Login.jsp");
 			rd.forward(request, response);
 
+		} finally {
+			rDAO.close();
 		}
 
 	}

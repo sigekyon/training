@@ -1,11 +1,9 @@
 package user.control;
 
 import java.io.IOException;
-
 import user.bean.RegistrantInfo;
-import user.parts.ReadRegistInfo;
 import user.parts.RegInfCheck;
-import user.parts.WriteRegistInfo;
+import user.parts.RegInfDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,20 +41,20 @@ public class ProcReg extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		RegInfDAO rDAO = null;
 		try {
-		
 			request.setCharacterEncoding("UTF-8"); 
 			response.setContentType("text/html; charset=UTF-8"); 
 			RequestDispatcher rd = null;
-
+						
 			errMsg = "";
+			rDAO = new RegInfDAO();
 
 			// 登録されたパラメータを取得
 			String regName = request.getParameter("regName");
 			String regAge = request.getParameter("regAge");
 			// 新規IDを設定
-			String regId = ReadRegistInfo.getNewId();
+			String regId = rDAO.getNextId();
 		
 			inputCheck(regId,regName, regAge);// 入力データに誤りがあった場合はその旨を表示させる
 
@@ -71,9 +69,10 @@ public class ProcReg extends HttpServlet {
 			regInfo.setrId(regId);
 			regInfo.setrName(regName);
 			regInfo.setrAge(regAge);
+			rDAO.insert(regId, regName, regAge);
 
 			// データを書き込む
-			WriteRegistInfo.regRegInfo(regInfo);
+//			WriteRegistInfo.regRegInfo(regInfo);
 
 			// 結果画面へ遷移するための情報を設定
 			request.setAttribute("regInfo", regInfo);
@@ -85,10 +84,14 @@ public class ProcReg extends HttpServlet {
 			e.printStackTrace();
 			request.setAttribute("errMsg", "エラーが発生しました。申し訳ありませんがもう一度最初からお願いします。");
 			HttpSession session = request.getSession(true);
-		    session.invalidate();   
+			session.invalidate();
 			RequestDispatcher rd = request.getRequestDispatcher(
 					"/Login.jsp");
 			rd.forward(request, response);
+		} finally {
+			if(rDAO != null){
+				rDAO.close();
+			}
 		}
 	}
 
